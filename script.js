@@ -80,10 +80,12 @@ function init() {
     playerNumArr = []
     opponentNumArr = []
     document.querySelector('.info-text').textContent = 'Your Turn'
-    square.forEach(square => square.addEventListener('click', handleClickSquare));
-    square.forEach(square=> square.classList.add('not-picked'))
-    square.forEach(square=> square.classList.remove('x'))
-    square.forEach(square=> square.classList.remove('o'))
+    square.forEach(square => {
+        square.addEventListener('click', handleClickSquare)
+        square.classList.add('not-picked')
+        square.classList.remove('x')
+        square.classList.remove('o')
+    });
 }
 
 function handleClickSquare(e) {

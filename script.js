@@ -5,9 +5,6 @@ let allNumArr = []
 let playerNumArr = []
 let opponentNumArr = []
 
-init ();
-newGameBtn.addEventListener('click', handleClickNewBtn)
-
 const DataControl = (() => {
     const addAllNum = (num) => {
         allNumArr = [...allNumArr, num]
@@ -77,7 +74,11 @@ const Opponent = (() => {
     return { attack }
 })()
 
+init ();
+newGameBtn.addEventListener('click', handleClickNewBtn)
+
 function init() {
+    Player.hover()
     allNumArr = []
     playerNumArr = []
     opponentNumArr = []

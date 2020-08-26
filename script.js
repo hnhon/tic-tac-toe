@@ -30,13 +30,13 @@ const Player = (() => {
         DataControl.addPlayerNum(num)
         if (checkWin(playerNumArr)) {
             endGame('player')
-            square.forEach(square => square.removeEventListener('click', handleClickSquare))
             return
         }
         if (allNumArr.length === 9) {
             endGame('draw')
             return
         }
+        square.forEach(square => square.removeEventListener('click', handleClickSquare))
         setTimeout(Opponent.attack, 2000)
     }
     return { hover, attack }
@@ -62,6 +62,7 @@ const Opponent = (() => {
             endGame('draw')
             return
         }
+        square.forEach(square => square.addEventListener('click', handleClickSquare))
     }
     return {attack}
 })()
@@ -88,6 +89,7 @@ function endGame (winner) {
     } else {
         document.querySelector('.info-display').textContent = `${winner.toUpperCase()} win!`
     }
+    square.forEach(square => square.removeEventListener('click', handleClickSquare))
 }
 //Debug function
 // const winning = [[1, 2, 3], [4, 5, 6]]

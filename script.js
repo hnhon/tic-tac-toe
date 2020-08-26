@@ -5,9 +5,8 @@ let allNumArr = []
 let playerNumArr = []
 let opponentNumArr = []
 
-newGameBtn.addEventListener('click', init)
-
 init ();
+newGameBtn.addEventListener('click', init)
 
 const DataControl = (() => {
     const addAllNum = (num) => {
@@ -28,6 +27,10 @@ const Player = (() => {
         notPickedSquare.forEach(el => el.classList.add('hover-o-shape'))
     }
     const attack = (el) => {
+        if (playerNumArr.some(num => num === parseInt(el.getAttribute('data')))) {
+            document.querySelector('.info-text').textContent = 'Pick another'
+            return
+        }
         el.classList.remove('not-picked')
         el.classList.add('o')
         let num = parseInt(el.getAttribute('data'))

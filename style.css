@@ -20,22 +20,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90vw;
-    height: 90vw;
+    /* set width and heigh the same */
+    width: 80vh;
+    height: 80vh;
     max-width: 1000px;
     max-height: 1000px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 40px;
-    background-color: black;
 }
 
 .info-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: white;
     margin: 40px auto;
+    margin-top: 0;
     padding: 0;
     font-size: 1.5rem;
     line-height: 1.2;
+}
+
+.new-game-btn {
+    background: rgba(42, 84, 199, 0.8);
+    color: white;
+    cursor: pointer;
+    border: 1px solid rgba(42, 84, 199, 0);
+    border-radius: 5px;
+    outline: none;
+    padding: 10px 20px;
+}
+
+.new-game-btn:hover {
+    background: rgb(42, 84, 199);
+    border: 1px solid rgb(42, 84, 199);
 }
 
 .game-board {
@@ -71,7 +90,7 @@
 
 .x::before {
     content: '';
-    width: 20px;
+    width: 10px;
     height: 90%;
     background-color: black;
     position: absolute;
@@ -82,7 +101,7 @@
 
 .x::after {
     content: '';
-    width: 20px;
+    width: 10px;
     height: 90%;
     background-color: black;
     position: absolute;
@@ -115,7 +134,7 @@
 
 .not-picked.hover-x-shape:hover::before {
     content: '';
-    width: 20px;
+    width: 15px;
     height: 90%;
     background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
@@ -126,7 +145,7 @@
 
 .not-picked.hover-x-shape:hover::after {
     content: '';
-    width: 20px;
+    width: 15px;
     height: 90%;
     background-color: rgba(0, 0, 0, 0.2);
     position: absolute;

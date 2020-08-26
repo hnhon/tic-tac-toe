@@ -30,7 +30,7 @@
     background-color: black;
 }
 
-.turn-display {
+.info-display {
     background-color: white;
     margin: 40px auto;
     padding: 0;
@@ -113,7 +113,7 @@
     border-radius: 50%;
 }
 
-.hover-x-shape:hover::before {
+.not-picked.hover-x-shape:hover::before {
     content: '';
     width: 10px;
     height: 90%;
@@ -124,7 +124,7 @@
     transform: rotate(45deg)
 }
 
-.hover-x-shape:hover::after {
+.not-picked.hover-x-shape:hover::after {
     content: '';
     width: 10px;
     height: 90%;
@@ -135,7 +135,7 @@
     transform: rotate(135deg)
 }
 
-.hover-o-shape:hover::before {
+.not-picked.hover-o-shape:hover::before {
     content: '';
     height: 90%;
     width: 90%;
@@ -146,7 +146,7 @@
     border-radius: 50%;
 }
 
-.hover-o-shape:hover::after {
+.not-picked.hover-o-shape:hover::after {
     content: '';
     height: 70%;
     width: 70%;

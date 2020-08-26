@@ -1,0 +1,158 @@
+:root {
+    
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.game-title {
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+.game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90vw;
+    height: 90vw;
+    max-width: 1000px;
+    max-height: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    background-color: black;
+}
+
+.turn-display {
+    background-color: white;
+    margin: 40px auto;
+    padding: 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+}
+
+.game-board {
+    width: 60%;
+    height: 60%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.square {
+    border: 10px solid green;
+    position: relative;
+}
+
+.square:nth-child(1), .square:nth-child(2), .square:nth-child(3) {
+    border-top: none;
+    border-bottom: none;
+}
+
+.square:nth-child(7), .square:nth-child(8), .square:nth-child(9) {
+    border-bottom: none;
+    border-top: none;
+}
+
+.square:nth-child(1n) {
+    border-left: none;
+}
+
+.square:nth-child(3n) {
+    border-right: none;
+}
+
+.x::before {
+    content: '';
+    width: 10px;
+    height: 90%;
+    background-color: black;
+    position: absolute;
+    left: calc(50% - 5px);
+    top: 5%;
+    transform: rotate(45deg)
+}
+
+.x::after {
+    content: '';
+    width: 10px;
+    height: 90%;
+    background-color: black;
+    position: absolute;
+    left: calc(50% - 5px);
+    top: 5%;
+    transform: rotate(135deg)
+}
+
+.o::before {
+    content: '';
+    height: 90%;
+    width: 90%;
+    background-color: black;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    border-radius: 50%;
+}
+
+.o::after {
+    content: '';
+    height: 70%;
+    width: 70%;
+    background-color: white;
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    border-radius: 50%;
+}
+
+.hover-x-shape:hover::before {
+    content: '';
+    width: 10px;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: calc(50% - 5px);
+    top: 5%;
+    transform: rotate(45deg)
+}
+
+.hover-x-shape:hover::after {
+    content: '';
+    width: 10px;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: calc(50% - 5px);
+    top: 5%;
+    transform: rotate(135deg)
+}
+
+.hover-o-shape:hover::before {
+    content: '';
+    height: 90%;
+    width: 90%;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    border-radius: 50%;
+}
+
+.hover-o-shape:hover::after {
+    content: '';
+    height: 70%;
+    width: 70%;
+    background-color: white;
+    position: absolute;
+    left: 15%;
+    top: 15%;
+    border-radius: 50%;
+}

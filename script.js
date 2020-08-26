@@ -30,6 +30,7 @@ const Player = (() => {
         DataControl.addPlayerNum(num)
         if (checkWin(playerNumArr)) {
             endGame('player')
+            square.forEach(square => square.removeEventListener('click', handleClickSquare))
             return
         }
         if (allNumArr.length === 9) {
@@ -65,7 +66,12 @@ const Opponent = (() => {
     return {attack}
 })()
 
-square.forEach(square => square.addEventListener('click', e => Player.attack(e.target)))
+// square.forEach(square => square.addEventListener('click', e => Player.attack(e.target)))
+square.forEach(square => square.addEventListener('click', handleClickSquare))
+
+function handleClickSquare(e) {
+    Player.attack(e.target)
+}
 
 function checkWin(numArr) {
     let isWin = winningCombination.some(combine =>

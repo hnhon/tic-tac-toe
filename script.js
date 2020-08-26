@@ -6,7 +6,7 @@ let playerNumArr = []
 let opponentNumArr = []
 
 init ();
-newGameBtn.addEventListener('click', init)
+newGameBtn.addEventListener('click', handleClickNewBtn)
 
 const DataControl = (() => {
     const addAllNum = (num) => {
@@ -77,9 +77,6 @@ const Opponent = (() => {
     return { attack }
 })()
 
-// square.forEach(square => square.addEventListener('click', e => Player.attack(e.target)))
-// square.forEach(square => square.addEventListener('click', handleClickSquare))
-
 function init() {
     allNumArr = []
     playerNumArr = []
@@ -91,6 +88,10 @@ function init() {
         square.classList.remove('x')
         square.classList.remove('o')
     });
+}
+
+function handleClickNewBtn () {
+    init()
 }
 
 function handleClickSquare(e) {
@@ -114,10 +115,7 @@ function endGame(winner) {
     }
     square.forEach(square => square.removeEventListener('click', handleClickSquare))
 }
-//Debug function
-// const winning = [[1, 2, 3], [4, 5, 6]]
-// function checkWinTest() {
-//     let test = [1, 3, 5, 7, 9, 2];
-//     winning.some(combine => combine.every(num => test.some(el => el == num))) ? console.log('win') : console.log('lose')
-// }
-// checkWinTest()
+
+function play () {
+
+}

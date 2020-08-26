@@ -1,8 +1,13 @@
 const square = document.querySelectorAll('.square')
+const newGameBtn = document.querySelector('.new-game-btn')
 const winningCombination = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 let allNumArr = []
 let playerNumArr = []
 let opponentNumArr = []
+
+newGameBtn.addEventListener('click', init)
+
+init ();
 
 const DataControl = (() => {
     const addAllNum = (num) => {
@@ -37,16 +42,16 @@ const Player = (() => {
             return
         }
         square.forEach(square => square.removeEventListener('click', handleClickSquare))
-        setTimeout(Opponent.attack, 2000)
+        Opponent.attack()
     }
     return { hover, attack }
 })();
 
 const Opponent = (() => {
     const attack = () => {
-        let randomNum = Math.floor(Math.random()*9) + 1;
+        let randomNum = Math.floor(Math.random() * 9) + 1;
         while (allNumArr.some(num => num === randomNum)) {
-            randomNum = Math.floor(Math.random()*9) + 1;
+            randomNum = Math.floor(Math.random() * 9) + 1;
         }
         let num = randomNum;
         DataControl.addOpponentNum(num)
@@ -64,11 +69,22 @@ const Opponent = (() => {
         }
         square.forEach(square => square.addEventListener('click', handleClickSquare))
     }
-    return {attack}
+    return { attack }
 })()
 
 // square.forEach(square => square.addEventListener('click', e => Player.attack(e.target)))
-square.forEach(square => square.addEventListener('click', handleClickSquare))
+// square.forEach(square => square.addEventListener('click', handleClickSquare))
+
+function init() {
+    allNumArr = []
+    playerNumArr = []
+    opponentNumArr = []
+    document.querySelector('.info-text').textContent = 'Your Turn'
+    square.forEach(square => square.addEventListener('click', handleClickSquare));
+    square.forEach(square=> square.classList.add('not-picked'))
+    square.forEach(square=> square.classList.remove('x'))
+    square.forEach(square=> square.classList.remove('o'))
+}
 
 function handleClickSquare(e) {
     Player.attack(e.target)
@@ -83,11 +99,11 @@ function checkWin(numArr) {
     return isWin;
 };
 
-function endGame (winner) {
+function endGame(winner) {
     if (winner === 'draw') {
-        document.querySelector('.info-display').textContent = 'Draw'
+        document.querySelector('.info-text').textContent = 'Draw'
     } else {
-        document.querySelector('.info-display').textContent = `${winner.toUpperCase()} win!`
+        document.querySelector('.info-text').textContent = `${winner.toUpperCase()} win!`
     }
     square.forEach(square => square.removeEventListener('click', handleClickSquare))
 }

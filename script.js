@@ -42,14 +42,13 @@ const Player = (() => {
             return
         }
         square.forEach(square => square.removeEventListener('click', handleClickSquare))
-        Opponent.attack()
+        setTimeout(Opponent.attack(), 1000); 
     }
     return { hover, attack }
 })();
 
 const Opponent = (() => {
     const attack = () => {
-        document.querySelector('.info-text').textContent = 'Opponent turn'
         let randomNum = Math.floor(Math.random() * 9) + 1;
         while (allNumArr.some(num => num === randomNum)) {
             randomNum = Math.floor(Math.random() * 9) + 1;
@@ -68,7 +67,6 @@ const Opponent = (() => {
             endGame('draw')
             return
         }
-        document.querySelector('.info-text').textContent = 'Your turn'
         square.forEach(square => square.addEventListener('click', handleClickSquare))
     }
     return { attack }
@@ -82,7 +80,7 @@ function init() {
     allNumArr = []
     playerNumArr = []
     opponentNumArr = []
-    document.querySelector('.info-text').textContent = 'Your turn'
+    document.querySelector('.info-text').textContent = 'Play'
     square.forEach(square => {
         square.addEventListener('click', handleClickSquare)
         square.classList.add('not-picked')
@@ -115,8 +113,4 @@ function endGame(winner) {
         document.querySelector('.info-text').textContent = `${winner.toUpperCase()} win!`
     }
     square.forEach(square => square.removeEventListener('click', handleClickSquare))
-}
-
-function play () {
-
 }

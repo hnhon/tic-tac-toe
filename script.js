@@ -25,7 +25,7 @@ const Player = (() => {
         notPickedSquare.forEach(el => el.classList.add('hover-o-shape'))
     }
     const attack = (el) => {
-        if (playerNumArr.some(num => num === parseInt(el.getAttribute('data')))) {
+        if (allNumArr.some(num => num === parseInt(el.getAttribute('data')))) {
             document.querySelector('.info-text').textContent = 'Pick another'
             return
         }

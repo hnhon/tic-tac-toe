@@ -4,6 +4,7 @@ const winningCombination = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8
 let allNumArr = []
 let playerNumArr = []
 let opponentNumArr = []
+let timeOutId = 0
 
 const DataControl = (() => {
     const addAllNum = (num) => {
@@ -42,7 +43,7 @@ const Player = (() => {
             return
         }
         square.forEach(square => square.removeEventListener('click', handleClickSquare))
-        setTimeout(Opponent.attack(), 1000); 
+        timeOutId = setTimeout(Opponent.attack, 2000); 
     }
     return { hover, attack }
 })();
@@ -76,7 +77,9 @@ init ();
 newGameBtn.addEventListener('click', handleClickNewBtn)
 
 function init() {
+    clearTimeout(timeOutId)
     Player.hover()
+    timeOutId = 0
     allNumArr = []
     playerNumArr = []
     opponentNumArr = []

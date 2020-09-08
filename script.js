@@ -5,6 +5,13 @@ let allNumArr = []
 let playerNumArr = []
 let opponentNumArr = []
 let timeOutId = 0
+let isEnd = false
+
+const gameControl = (() => {
+    let timeOutId = 0
+    let isEnd = false
+    return {timeOutId, isEnd}
+})()
 
 const DataControl = (() => {
     const addAllNum = (num) => {
@@ -25,8 +32,10 @@ const Player = (() => {
         notPickedSquare.forEach(el => el.classList.add('hover-o-shape'))
     }
     const attack = (el) => {
+        isEnd = false;
         if (allNumArr.some(num => num === parseInt(el.getAttribute('data')))) {
             document.querySelector('.info-text').textContent = 'Pick another'
+            isEnd = true
             return
         }
         el.classList.remove('not-picked')
@@ -35,15 +44,18 @@ const Player = (() => {
         DataControl.addAllNum(num)
         DataControl.addPlayerNum(num)
         if (checkWin(playerNumArr)) {
+            isEnd = true;
             endGame('player')
             return
         }
         if (allNumArr.length === 9) {
+            isEnd = true;
             endGame('draw')
             return
         }
+        square.forEach(square => square.classList.remove('hover-o-shape'))
         square.forEach(square => square.removeEventListener('click', handleClickSquare))
-        timeOutId = setTimeout(Opponent.attack, 2000); 
+        // timeOutId = setTimeout(Opponent.attack, 2000);
     }
     return { hover, attack }
 })();
@@ -69,35 +81,44 @@ const Opponent = (() => {
             return
         }
         square.forEach(square => square.addEventListener('click', handleClickSquare))
+        Player.hover()
     }
     return { attack }
 })()
 
-init ();
+function play(el) {
+    Player.attack(el);
+    if (isEnd == true) return;
+    timeOutId = setTimeout(Opponent.attack, 2000)
+}
+
+init();
 newGameBtn.addEventListener('click', handleClickNewBtn)
 
 function init() {
     clearTimeout(timeOutId)
-    Player.hover()
-    timeOutId = 0
-    allNumArr = []
-    playerNumArr = []
-    opponentNumArr = []
-    document.querySelector('.info-text').textContent = 'Play'
     square.forEach(square => {
         square.addEventListener('click', handleClickSquare)
         square.classList.add('not-picked')
         square.classList.remove('x')
         square.classList.remove('o')
     });
+    isEnd = false;
+    timeOutId = 0
+    allNumArr = []
+    playerNumArr = []
+    opponentNumArr = []
+    Player.hover()
+    document.querySelector('.info-text').textContent = 'Play'
 }
 
-function handleClickNewBtn () {
+function handleClickNewBtn() {
     init()
 }
 
 function handleClickSquare(e) {
-    Player.attack(e.target)
+    // Player.attack(e.target)
+    play(e.target);
 }
 
 function checkWin(numArr) {

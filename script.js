@@ -4,13 +4,11 @@ const winningCombination = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8
 let allNumArr = []
 let playerNumArr = []
 let opponentNumArr = []
-let timeOutId = 0
-let isEnd = false
 
 const gameControl = (() => {
     let timeOutId = 0
     let isEnd = false
-    return {timeOutId, isEnd}
+    return { timeOutId, isEnd }
 })()
 
 const DataControl = (() => {
@@ -32,10 +30,10 @@ const Player = (() => {
         notPickedSquare.forEach(el => el.classList.add('hover-o-shape'))
     }
     const attack = (el) => {
-        isEnd = false;
+        gameControl.isEnd = false;
         if (allNumArr.some(num => num === parseInt(el.getAttribute('data')))) {
             document.querySelector('.info-text').textContent = 'Pick another'
-            isEnd = true
+            gameControl.isEnd = true
             return
         }
         el.classList.remove('not-picked')
@@ -44,18 +42,17 @@ const Player = (() => {
         DataControl.addAllNum(num)
         DataControl.addPlayerNum(num)
         if (checkWin(playerNumArr)) {
-            isEnd = true;
+            gameControl.isEnd = true;
             endGame('player')
             return
         }
         if (allNumArr.length === 9) {
-            isEnd = true;
+            gameControl.isEnd = true;
             endGame('draw')
             return
         }
         square.forEach(square => square.classList.remove('hover-o-shape'))
         square.forEach(square => square.removeEventListener('click', handleClickSquare))
-        // timeOutId = setTimeout(Opponent.attack, 2000);
     }
     return { hover, attack }
 })();
@@ -88,23 +85,23 @@ const Opponent = (() => {
 
 function play(el) {
     Player.attack(el);
-    if (isEnd == true) return;
-    timeOutId = setTimeout(Opponent.attack, 2000)
+    if (gameControl.isEnd == true) return;
+    gameControl.timeOutId = setTimeout(Opponent.attack, 2000)
 }
 
 init();
 newGameBtn.addEventListener('click', handleClickNewBtn)
 
 function init() {
-    clearTimeout(timeOutId)
+    clearTimeout(gameControl.timeOutId)
     square.forEach(square => {
         square.addEventListener('click', handleClickSquare)
         square.classList.add('not-picked')
         square.classList.remove('x')
         square.classList.remove('o')
     });
-    isEnd = false;
-    timeOutId = 0
+    gameControl.isEnd = false;
+    gameControl.timeOutId = 0
     allNumArr = []
     playerNumArr = []
     opponentNumArr = []
